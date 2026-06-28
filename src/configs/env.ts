@@ -7,7 +7,10 @@ export const envSchema = z.object({
 
     LOG_LEVEL: z
         .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace'])
-        .default('info')
+        .default('info'),
+
+    UPSTASH_REDIS_REST_URL: z.string().url(),
+    UPSTASH_REDIS_REST_TOKEN: z.string()
 })
 
 export type Env = z.infer<typeof envSchema>
