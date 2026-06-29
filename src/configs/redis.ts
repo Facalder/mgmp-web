@@ -8,8 +8,8 @@ const globalForRedis = globalThis as unknown as {
 export const redis =
     globalForRedis.redis ??
     new Redis({
-        url: env.UPSTASH_REDIS_REST_URL,
-        token: env.UPSTASH_REDIS_REST_TOKEN,
+        url: env.redis.url,
+        token: env.redis.token,
         retry: {
             retries: 3,
             backoff: retryCount => Math.min(retryCount * 200, 2000)

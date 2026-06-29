@@ -6,7 +6,7 @@ import env from '@/configs/env'
 neonConfig.webSocketConstructor = ws
 
 const pool = new Pool({
-    connectionString: env.DATABASE_URL,
+    connectionString: env.db.url,
     max: 20,
     connectionTimeoutMillis: 5000,
     idleTimeoutMillis: 30000
@@ -14,7 +14,7 @@ const pool = new Pool({
 
 const db = drizzle({
     client: pool,
-    logger: env.NODE_ENV === 'development'
+    logger: env.app.nodeEnv === 'development'
 })
 
 export default db
