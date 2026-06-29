@@ -1,4 +1,5 @@
-import { AppSidebar } from '@/components/app-sidebar'
+import { AppSidebar } from '@/components/dashboard/app-sidebar'
+import { DashboardHeader } from '@/components/dashboard/dashboard-header'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 
 export default function DashboardLayout({
@@ -9,7 +10,10 @@ export default function DashboardLayout({
     return (
         <SidebarProvider>
             <AppSidebar />
-            <SidebarInset>{children}</SidebarInset>
+            <SidebarInset>
+                <DashboardHeader />
+                <main className='flex-1 w-full px-4 py-6'>{children}</main>
+            </SidebarInset>
         </SidebarProvider>
     )
 }

@@ -1,34 +1,23 @@
-'use client'
-
-import { CaretRightIcon } from '@phosphor-icons/react'
-import type * as React from 'react'
-import { SearchForm } from '@/components/search-form'
 import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger
-} from '@/components/ui/collapsible'
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarRail
-} from '@/components/ui/sidebar'
-import { VersionSwitcher } from '@/components/version-switcher'
+    BookOpenIcon,
+    CodeIcon,
+    HammerIcon,
+    StackIcon,
+    UsersIcon
+} from '@phosphor-icons/react'
 
-// This is sample data.
-const data = {
+export const sidebarNavData = {
+    user: {
+        name: 'shadcn',
+        email: 'm@example.com',
+        avatar: '/avatars/shadcn.jpg'
+    },
     versions: ['1.0.1', '1.1.0-alpha', '2.0.0-beta1'],
     navMain: [
         {
             title: 'Getting Started',
             url: '#',
+            icon: BookOpenIcon,
             items: [
                 {
                     title: 'Installation',
@@ -43,6 +32,7 @@ const data = {
         {
             title: 'Build Your Application',
             url: '#',
+            icon: HammerIcon,
             items: [
                 {
                     title: 'Routing',
@@ -98,6 +88,7 @@ const data = {
         {
             title: 'API Reference',
             url: '#',
+            icon: CodeIcon,
             items: [
                 {
                     title: 'Components',
@@ -128,6 +119,7 @@ const data = {
         {
             title: 'Architecture',
             url: '#',
+            icon: StackIcon,
             items: [
                 {
                     title: 'Accessibility',
@@ -154,6 +146,7 @@ const data = {
         {
             title: 'Community',
             url: '#',
+            icon: UsersIcon,
             items: [
                 {
                     title: 'Contribution Guide',
@@ -162,57 +155,4 @@ const data = {
             ]
         }
     ]
-}
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-    return (
-        <Sidebar {...props}>
-            <SidebarHeader>
-                <VersionSwitcher
-                    versions={data.versions}
-                    defaultVersion={data.versions[0]}
-                />
-                <SearchForm />
-            </SidebarHeader>
-            <SidebarContent className='gap-0'>
-                {/* We create a collapsible SidebarGroup for each parent. */}
-                {data.navMain.map(item => (
-                    <Collapsible
-                        key={item.title}
-                        title={item.title}
-                        defaultOpen
-                        className='group/collapsible'
-                    >
-                        <SidebarGroup>
-                            <SidebarGroupLabel
-                                className='group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
-                                render={<CollapsibleTrigger />}
-                            >
-                                {item.title}{' '}
-                                <CaretRightIcon className='ml-auto transition-transform group-data-open/collapsible:rotate-90' />
-                            </SidebarGroupLabel>
-                            <CollapsibleContent>
-                                <SidebarGroupContent>
-                                    <SidebarMenu>
-                                        {item.items.map(item => (
-                                            <SidebarMenuItem key={item.title}>
-                                                <SidebarMenuButton
-                                                    isActive={item.isActive}
-                                                    render={
-                                                        <a href={item.url}>
-                                                            {item.title}
-                                                        </a>
-                                                    }
-                                                />
-                                            </SidebarMenuItem>
-                                        ))}
-                                    </SidebarMenu>
-                                </SidebarGroupContent>
-                            </CollapsibleContent>
-                        </SidebarGroup>
-                    </Collapsible>
-                ))}
-            </SidebarContent>
-            <SidebarRail />
-        </Sidebar>
-    )
 }
