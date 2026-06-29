@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import './globals.css'
+import './css/globals.css'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-sans' })
@@ -26,7 +27,9 @@ export default function RootLayout({
                 roboto.variable
             )}
         >
-            <body className='min-h-full flex flex-col'>{children}</body>
+            <body className='min-h-full flex flex-col'>
+                <TooltipProvider>{children}</TooltipProvider>
+            </body>
         </html>
     )
 }
