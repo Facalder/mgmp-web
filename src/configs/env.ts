@@ -11,6 +11,7 @@ const rawEnv = createEnv({
 
         UPSTASH_REDIS_REST_URL: url(),
         UPSTASH_REDIS_REST_TOKEN: str().min(1),
+        REDIS_PREFIX: str().optional(),
 
         DATABASE_URL: url(),
 
@@ -26,9 +27,12 @@ const rawEnv = createEnv({
         LOG_LEVEL: process.env.LOG_LEVEL,
         UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
         UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
+        REDIS_PREFIX: process.env.REDIS_PREFIX,
         DATABASE_URL: process.env.DATABASE_URL,
         BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
-        BETTER_AUTH_URL: process.env.BETTER_AUTH_URL
+        BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+        NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+        NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME
     },
     skipValidation:
         process.env.SKIP_ENV_VALIDATION === 'true' || process.env.CI === 'true'
@@ -41,7 +45,8 @@ export const env = {
     },
     redis: {
         url: rawEnv.UPSTASH_REDIS_REST_URL,
-        token: rawEnv.UPSTASH_REDIS_REST_TOKEN
+        token: rawEnv.UPSTASH_REDIS_REST_TOKEN,
+        prefix: rawEnv.REDIS_PREFIX ?? `${rawEnv.NODE_ENV}:mgmp:`
     },
     db: {
         url: rawEnv.DATABASE_URL

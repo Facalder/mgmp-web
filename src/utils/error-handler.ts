@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import z, { ZodError } from 'zod'
+import env from '@/configs/env'
 import { STATUS_CODES } from '@/constants/status-codes'
 import { ApiError, ErrorCode } from '@/utils/api-error'
 import { logger } from '@/utils/logger'
@@ -11,7 +12,7 @@ export function handleError(error: unknown) {
             : `err_${Math.random().toString(36).substring(2, 15)}`
 
     const timestamp = new Date().toISOString()
-    const isDev = process.env.NODE_ENV === 'development'
+    const isDev = env.app.nodeEnv === 'development'
 
     let apiError: ApiError
 

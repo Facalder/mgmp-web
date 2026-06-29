@@ -16,12 +16,11 @@ export const redis =
         }
     })
 
-if (process.env.NODE_ENV !== 'production') {
+if (env.app.nodeEnv !== 'production') {
     globalForRedis.redis = redis
 }
 
-export const REDIS_PREFIX =
-    process.env.REDIS_PREFIX || `${process.env.NODE_ENV || 'development'}:mgmp:`
+export const REDIS_PREFIX = env.redis.prefix
 
 export function getPrefixedKey(key: string): string {
     if (key.startsWith(REDIS_PREFIX)) {
