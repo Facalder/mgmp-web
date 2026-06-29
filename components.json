@@ -1,11 +1,11 @@
 {
     "$schema": "https://ui.shadcn.com/schema.json",
-    "style": "base-lyra",
+    "style": "base-luma",
     "rsc": true,
     "tsx": true,
     "tailwind": {
         "config": "",
-        "css": "src/app/globals.css",
+        "css": "src/app/css/globals.css",
         "baseColor": "stone",
         "cssVariables": true,
         "prefix": ""
@@ -19,7 +19,7 @@
         "lib": "@/lib",
         "hooks": "@/hooks"
     },
-    "menuColor": "inverted",
+    "menuColor": "inverted-translucent",
     "menuAccent": "subtle",
     "registries": {}
 }
