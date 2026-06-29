@@ -37,7 +37,7 @@ export class ApiError extends Error {
     }
 
     static badRequest(
-        message = 'Bad Request',
+        message = 'Data yang Anda masukkan tidak lengkap atau tidak sesuai.',
         errors?: unknown,
         code = ErrorCode.VALIDATION_ERROR
     ) {
@@ -51,7 +51,7 @@ export class ApiError extends Error {
     }
 
     static unauthorized(
-        message = 'Unauthorized',
+        message = 'Sesi Anda telah berakhir. Silakan masuk kembali.',
         code = ErrorCode.UNAUTHORIZED
     ) {
         return new ApiError(
@@ -63,7 +63,10 @@ export class ApiError extends Error {
         )
     }
 
-    static forbidden(message = 'Forbidden', code = ErrorCode.FORBIDDEN) {
+    static forbidden(
+        message = 'Anda tidak memiliki izin untuk melakukan tindakan ini.',
+        code = ErrorCode.FORBIDDEN
+    ) {
         return new ApiError(
             STATUS_CODES.FORBIDDEN,
             message,
@@ -73,7 +76,10 @@ export class ApiError extends Error {
         )
     }
 
-    static notFound(message = 'Not Found', code = ErrorCode.NOT_FOUND) {
+    static notFound(
+        message = 'Data yang Anda cari tidak ditemukan.',
+        code = ErrorCode.NOT_FOUND
+    ) {
         return new ApiError(
             STATUS_CODES.NOT_FOUND,
             message,
@@ -83,7 +89,10 @@ export class ApiError extends Error {
         )
     }
 
-    static conflict(message = 'Conflict', code = ErrorCode.CONFLICT) {
+    static conflict(
+        message = 'Data ini sudah ada di sistem.',
+        code = ErrorCode.CONFLICT
+    ) {
         return new ApiError(
             STATUS_CODES.CONFLICT,
             message,
@@ -94,7 +103,7 @@ export class ApiError extends Error {
     }
 
     static validation(
-        message = 'Validation failed',
+        message = 'Data yang Anda masukkan tidak lengkap atau tidak sesuai.',
         errors?: unknown,
         code = ErrorCode.VALIDATION_ERROR
     ) {
@@ -108,7 +117,7 @@ export class ApiError extends Error {
     }
 
     static notImplemented(
-        message = 'Not Implemented',
+        message = 'Fitur ini belum tersedia.',
         code = ErrorCode.INTERNAL_ERROR
     ) {
         return new ApiError(
@@ -121,7 +130,7 @@ export class ApiError extends Error {
     }
 
     static badGateway(
-        message = 'Bad Gateway',
+        message = 'Sistem sedang gangguan. Coba lagi dalam beberapa menit.',
         code = ErrorCode.SERVICE_UNAVAILABLE
     ) {
         return new ApiError(
@@ -134,7 +143,7 @@ export class ApiError extends Error {
     }
 
     static serviceUnavailable(
-        message = 'Service Unavailable',
+        message = 'Sistem sedang gangguan. Coba lagi dalam beberapa menit.',
         code = ErrorCode.SERVICE_UNAVAILABLE
     ) {
         return new ApiError(
@@ -147,7 +156,7 @@ export class ApiError extends Error {
     }
 
     static tooManyRequests(
-        message = 'Too Many Requests',
+        message = 'Terlalu banyak percobaan. Silakan tunggu sebentar.',
         code = ErrorCode.TOO_MANY_REQUESTS
     ) {
         return new ApiError(
@@ -160,7 +169,7 @@ export class ApiError extends Error {
     }
 
     static server(
-        message = 'Internal Server Error',
+        message = 'Terjadi kesalahan pada sistem.',
         isOperational = false,
         errors?: unknown,
         code = ErrorCode.INTERNAL_ERROR
@@ -175,7 +184,7 @@ export class ApiError extends Error {
     }
 
     static internal(
-        message = 'Internal Server Error',
+        message = 'Terjadi kesalahan pada sistem.',
         code = ErrorCode.INTERNAL_ERROR
     ) {
         return ApiError.server(message, false, undefined, code)

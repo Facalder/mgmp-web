@@ -18,14 +18,16 @@ export function handleError(error: unknown) {
 
     if (error instanceof ZodError) {
         apiError = ApiError.validation(
-            'Invalid request data',
+            'Data yang Anda masukkan tidak lengkap atau tidak sesuai.',
             z.flattenError(error)
         )
     } else if (error instanceof ApiError) {
         apiError = error
     } else {
         const message =
-            error instanceof Error ? error.message : 'Internal Server Error'
+            error instanceof Error
+                ? error.message
+                : 'Terjadi kesalahan pada sistem.'
         apiError = ApiError.server(message, false)
     }
 
@@ -78,7 +80,7 @@ export function handleError(error: unknown) {
             code: isOperational ? apiError.code : ErrorCode.INTERNAL_ERROR,
             message: isOperational
                 ? apiError.message
-                : 'An unexpected error occurred. Please reference the error ID when contacting support.',
+                : `Terjadi kesalahan pada sistem. Silakan catat kode referensi berikut dan hubungi admin: ${errorId}`,
             errors: isOperational ? (apiError.errors ?? null) : null,
             errorId,
             timestamp

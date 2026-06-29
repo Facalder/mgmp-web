@@ -1,5 +1,5 @@
-import { type NextRequest, NextResponse } from 'next/server'
-import { STATUS_CODES } from '@/constants/status-codes'
+import type { NextRequest } from 'next/server'
+import { handleError } from '@/utils/error-handler'
 
 type HandlerContext = {
     params?: Record<string, string>
@@ -18,37 +18,14 @@ export function RouteHandler(fn: RouteHandlerFn) {
         try {
             return await fn(req, ctx)
         } catch (error: unknown) {
-            console.error(error, 'API Error')
-
-            let message = 'Internal Server Error'
-            let status: number = STATUS_CODES.INTERNAL_SERVER_ERROR
-
-            if (error instanceof Error) {
-                message = error.message
-
-                if (
-                    'status' in error &&
-                    typeof (error as Record<string, unknown>).status ===
-                        'number'
-                ) {
-                    status = (error as Record<string, unknown>).status as number
-                }
-            }
-
-            return NextResponse.json(
-                {
-                    success: false,
-                    message
-                },
-                { status }
-            )
+            return handleError(error)
         }
     }
 }
 
 /**
  * ? USAGE:
-
+ 
   export const GET = RouteHandler(async () => {
     return new Response(JSON.stringify({ success: true }));
   });
