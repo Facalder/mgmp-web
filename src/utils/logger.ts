@@ -55,7 +55,15 @@ const prodOptions: LoggerOptions = {
             '*.secret',
             '*.authorization',
             'req.headers.cookie',
-            'req.headers.authorization'
+            'req.headers.authorization',
+            'email',
+            '*.email',
+            'phone',
+            '*.phone',
+            'phone_number',
+            '*.phone_number',
+            'phoneNumber',
+            '*.phoneNumber'
         ],
         censor: '[REDACTED]'
     }

@@ -7,7 +7,7 @@ neonConfig.webSocketConstructor = ws
 
 const pool = new Pool({
     connectionString: env.db.url,
-    max: 20,
+    max: 5,
     connectionTimeoutMillis: 5000,
     idleTimeoutMillis: 30000
 })
