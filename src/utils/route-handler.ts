@@ -1,19 +1,12 @@
 import type { NextRequest } from 'next/server'
 import { handleError } from '@/utils/error-handler'
 
-type HandlerContext = {
-    params?: Record<string, string>
-}
-
-type RouteHandlerFn = (
-    req: NextRequest,
-    ctx?: HandlerContext
-) => Promise<Response>
-
-export function RouteHandler(fn: RouteHandlerFn) {
+export function RouteHandler<T = Record<string, string | string[]>>(
+    fn: (req: NextRequest, ctx: { params: Promise<T> }) => Promise<Response>
+) {
     return async (
         req: NextRequest,
-        ctx?: HandlerContext
+        ctx: { params: Promise<T> }
     ): Promise<Response> => {
         try {
             return await fn(req, ctx)
