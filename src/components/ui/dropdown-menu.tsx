@@ -5,15 +5,19 @@ import { CaretRightIcon, CheckIcon } from '@phosphor-icons/react'
 import type * as React from 'react'
 import { cn } from '@/lib/utils'
 
-function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
+function DropdownMenu({ ...props }: Readonly<MenuPrimitive.Root.Props>) {
     return <MenuPrimitive.Root data-slot='dropdown-menu' {...props} />
 }
 
-function DropdownMenuPortal({ ...props }: MenuPrimitive.Portal.Props) {
+function DropdownMenuPortal({
+    ...props
+}: Readonly<MenuPrimitive.Portal.Props>) {
     return <MenuPrimitive.Portal data-slot='dropdown-menu-portal' {...props} />
 }
 
-function DropdownMenuTrigger({ ...props }: MenuPrimitive.Trigger.Props) {
+function DropdownMenuTrigger({
+    ...props
+}: Readonly<MenuPrimitive.Trigger.Props>) {
     return (
         <MenuPrimitive.Trigger data-slot='dropdown-menu-trigger' {...props} />
     )
@@ -53,7 +57,7 @@ function DropdownMenuContent({
     )
 }
 
-function DropdownMenuGroup({ ...props }: MenuPrimitive.Group.Props) {
+function DropdownMenuGroup({ ...props }: Readonly<MenuPrimitive.Group.Props>) {
     return <MenuPrimitive.Group data-slot='dropdown-menu-group' {...props} />
 }
 
@@ -61,15 +65,15 @@ function DropdownMenuLabel({
     className,
     inset,
     ...props
-}: MenuPrimitive.GroupLabel.Props & {
+}: React.ComponentProps<'div'> & {
     inset?: boolean
 }) {
     return (
-        <MenuPrimitive.GroupLabel
+        <div
             data-slot='dropdown-menu-label'
             data-inset={inset}
             className={cn(
-                'px-3 py-2.5 text-xs text-muted-foreground data-inset:pl-9.5',
+                'px-3 py-2.5 text-xs text-muted-foreground data-[inset=true]:pl-9.5',
                 className
             )}
             {...props}
@@ -100,7 +104,9 @@ function DropdownMenuItem({
     )
 }
 
-function DropdownMenuSub({ ...props }: MenuPrimitive.SubmenuRoot.Props) {
+function DropdownMenuSub({
+    ...props
+}: Readonly<MenuPrimitive.SubmenuRoot.Props>) {
     return (
         <MenuPrimitive.SubmenuRoot data-slot='dropdown-menu-sub' {...props} />
     )
@@ -187,7 +193,9 @@ function DropdownMenuCheckboxItem({
     )
 }
 
-function DropdownMenuRadioGroup({ ...props }: MenuPrimitive.RadioGroup.Props) {
+function DropdownMenuRadioGroup({
+    ...props
+}: Readonly<MenuPrimitive.RadioGroup.Props>) {
     return (
         <MenuPrimitive.RadioGroup
             data-slot='dropdown-menu-radio-group'
@@ -230,7 +238,7 @@ function DropdownMenuRadioItem({
 function DropdownMenuSeparator({
     className,
     ...props
-}: MenuPrimitive.Separator.Props) {
+}: Readonly<MenuPrimitive.Separator.Props>) {
     return (
         <MenuPrimitive.Separator
             data-slot='dropdown-menu-separator'

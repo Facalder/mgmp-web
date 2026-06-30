@@ -96,6 +96,14 @@ const mem = {
     }
 }
 
+function parseMemValue<T>(val: string): T {
+    try {
+        return JSON.parse(val) as T
+    } catch {
+        return val as unknown as T
+    }
+}
+
 export const redisSecondaryStorage = {
     get: async <T = string>(key: string): Promise<T | null> => {
         const fullKey = getPrefixedKey(key)
@@ -104,11 +112,7 @@ export const redisSecondaryStorage = {
         if (CIRCUIT.open) {
             const val = mem.get(fullKey)
             if (!val) return null
-            try {
-                return JSON.parse(val) as T
-            } catch {
-                return val as unknown as T
-            }
+            return parseMemValue<T>(val)
         }
 
         try {
@@ -124,20 +128,12 @@ export const redisSecondaryStorage = {
 
             const val = mem.get(fullKey)
             if (!val) return null
-            try {
-                return JSON.parse(val) as T
-            } catch {
-                return val as unknown as T
-            }
+            return parseMemValue<T>(val)
         } catch {
             recordFailure()
             const val = mem.get(fullKey)
             if (!val) return null
-            try {
-                return JSON.parse(val) as T
-            } catch {
-                return val as unknown as T
-            }
+            return parseMemValue<T>(val)
         }
     },
 
