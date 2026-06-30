@@ -41,7 +41,7 @@ const rawEnv = createEnv({
 export const env = {
     app: {
         nodeEnv: rawEnv.NODE_ENV,
-        logLevel: rawEnv.LOG_LEVEL
+        logLevel: rawEnv.LOG_LEVEL || 'info'
     },
     redis: {
         url: rawEnv.UPSTASH_REDIS_REST_URL,
