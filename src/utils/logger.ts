@@ -1,11 +1,11 @@
 import pino, { type LoggerOptions } from 'pino'
 import env from '@/configs/env'
 
-const { NODE_ENV, LOG_LEVEL } = env
-const isDev = NODE_ENV === 'development' && !process.env.VERCEL
+const { nodeEnv, logLevel } = env.app
+const isDev = nodeEnv === 'development' && !process.env.VERCEL
 
 const devOptions: LoggerOptions = {
-    level: LOG_LEVEL,
+    level: logLevel,
     transport: {
         target: 'pino-pretty',
         options: {
@@ -31,7 +31,7 @@ const devOptions: LoggerOptions = {
 }
 
 const prodOptions: LoggerOptions = {
-    level: LOG_LEVEL,
+    level: logLevel,
     base: null,
     timestamp: pino.stdTimeFunctions.isoTime,
     formatters: {
@@ -55,7 +55,15 @@ const prodOptions: LoggerOptions = {
             '*.secret',
             '*.authorization',
             'req.headers.cookie',
-            'req.headers.authorization'
+            'req.headers.authorization',
+            'email',
+            '*.email',
+            'phone',
+            '*.phone',
+            'phone_number',
+            '*.phone_number',
+            'phoneNumber',
+            '*.phoneNumber'
         ],
         censor: '[REDACTED]'
     }
