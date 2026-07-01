@@ -7,6 +7,7 @@ export const users = pgTable(
     {
         id: text('id').primaryKey(),
 
+        nip: varchar('nip', { length: 20 }).unique(),
         name: varchar('name', { length: 100 }).notNull(),
         email: varchar('email', { length: 255 }).notNull().unique(),
         email_verified: boolean('email_verified').notNull().default(false),

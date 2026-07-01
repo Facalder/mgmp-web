@@ -1,6 +1,7 @@
 import { createEnv, str, url } from 'next-safe-env'
 
 const rawEnv = createEnv({
+    adapter: 'nextjs',
     server: {
         NODE_ENV: str()
             .enum(['development', 'test', 'production'])

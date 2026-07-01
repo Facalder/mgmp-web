@@ -2,6 +2,7 @@ import { neonConfig, Pool } from '@neondatabase/serverless'
 import { drizzle } from 'drizzle-orm/neon-serverless'
 import ws from 'ws'
 import env from '@/configs/env'
+import { relations } from '@/db/relations'
 
 neonConfig.webSocketConstructor = ws
 
@@ -14,6 +15,7 @@ const pool = new Pool({
 
 const db = drizzle({
     client: pool,
+    relations,
     logger: env.app.nodeEnv === 'development'
 })
 
