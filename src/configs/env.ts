@@ -1,4 +1,4 @@
-import { createEnv, str, url } from 'next-safe-env'
+import { bool, createEnv, num, str, url } from 'next-safe-env'
 
 const rawEnv = createEnv({
     adapter: 'nextjs',
@@ -17,7 +17,16 @@ const rawEnv = createEnv({
         DATABASE_URL: url(),
 
         BETTER_AUTH_SECRET: str().min(32),
-        BETTER_AUTH_URL: url()
+        BETTER_AUTH_URL: url(),
+        TRUSTED_ORIGIN: url(),
+
+        SESSION_EXPIRES_IN: num().default(604800),
+        SESSION_UPDATE_AGE: num().default(86400),
+        SESSION_COOKIE_CACHE_ENABLED: bool().default(true),
+        SESSION_COOKIE_CACHE_MAX_AGE: num().default(300),
+
+        OTP_LENGTH: num().default(6),
+        OTP_EXPIRES_IN: num().default(600)
     },
     client: {
         NEXT_PUBLIC_API_URL: url(),
@@ -32,6 +41,12 @@ const rawEnv = createEnv({
         DATABASE_URL: process.env.DATABASE_URL,
         BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
         BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+        SESSION_EXPIRES_IN: process.env.SESSION_EXPIRES_IN,
+        SESSION_UPDATE_AGE: process.env.SESSION_UPDATE_AGE,
+        SESSION_COOKIE_CACHE_ENABLED: process.env.SESSION_COOKIE_CACHE_ENABLED,
+        SESSION_COOKIE_CACHE_MAX_AGE: process.env.SESSION_COOKIE_CACHE_MAX_AGE,
+        OTP_LENGTH: process.env.OTP_LENGTH,
+        OTP_EXPIRES_IN: process.env.OTP_EXPIRES_IN,
         NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
         NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME
     },
@@ -58,7 +73,16 @@ export const env = {
     },
     auth: {
         secret: rawEnv.BETTER_AUTH_SECRET,
-        url: rawEnv.BETTER_AUTH_URL
+        url: rawEnv.BETTER_AUTH_URL,
+        trustedOrigin: rawEnv.TRUSTED_ORIGIN,
+        otpLength: rawEnv.OTP_LENGTH,
+        otpExpiresIn: rawEnv.OTP_EXPIRES_IN
+    },
+    session: {
+        expiresIn: rawEnv.SESSION_EXPIRES_IN,
+        updateAge: rawEnv.SESSION_UPDATE_AGE,
+        cookieCacheEnabled: rawEnv.SESSION_COOKIE_CACHE_ENABLED,
+        cookieCacheMaxAge: rawEnv.SESSION_COOKIE_CACHE_MAX_AGE
     }
 } as const
 

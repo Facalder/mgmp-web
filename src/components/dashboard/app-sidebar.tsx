@@ -24,7 +24,23 @@ import {
 } from '@/components/ui/sidebar'
 import { sidebarNavData } from '@/constants/sidebar-data'
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+    user?: {
+        name: string
+        email: string
+        avatar?: string | null
+    }
+}
+
+export function AppSidebar({ user, ...props }: Readonly<AppSidebarProps>) {
+    const displayUser = user
+        ? {
+              name: user.name,
+              email: user.email,
+              avatar: user.avatar ?? '/avatars/shadcn.jpg'
+          }
+        : sidebarNavData.user
+
     return (
         <Sidebar {...props}>
             <SidebarHeader>
@@ -86,7 +102,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 ))}
             </SidebarContent>
             <SidebarFooter>
-                <NavUser user={sidebarNavData.user} />
+                <NavUser user={displayUser} />
             </SidebarFooter>
             <SidebarRail />
         </Sidebar>
